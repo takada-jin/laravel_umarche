@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\Auth\NewPasswordController;
 use App\Http\Controllers\admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\admin\Auth\RegisteredUserController;
 use App\Http\Controllers\admin\Auth\VerifyEmailController;
+use App\Http\Controllers\admin\OwnersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.welcome');
 });
+
+Route::resource('owners', OwnersController::class)
+->middleware('auth:admin');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
