@@ -8,6 +8,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UploadImageRequest;
 use App\Services\ImageService;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
 
@@ -128,6 +129,20 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Image::findOrFail($id);
+        $filepath = 'public/products/'.$image->filename;
+
+        if(Storage::exists($filepath)){
+            Storage::delete($filepath);
+        }
+
+        Image::findOrFail($id)->delete();
+
+        return redirect()
+        ->route('owner.images.index')
+        ->with([
+            'message' => '画像削除しました。',
+            'status' => 'alert'
+        ]);
     }
 }
