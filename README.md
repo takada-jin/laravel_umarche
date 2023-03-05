@@ -7,7 +7,7 @@
 画像のデータは
 
 public/imagesフォルダ内に
-sample1.jpg ~ sample.jpg6 として
+sample1.jpg 〜 sample.jpg6 として
 保存しています
 
 php artisan storage:link で
