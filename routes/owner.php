@@ -10,6 +10,7 @@ use App\Http\Controllers\owner\Auth\RegisteredUserController;
 use App\Http\Controllers\owner\Auth\VerifyEmailController;
 use App\Http\Controllers\owner\ShopController;
 use App\Http\Controllers\owner\ImageController;
+use App\Http\Controllers\owner\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,9 @@ Route::prefix('shops')->
     });
 
     Route::resource('images', ImageController::class)
+    ->middleware('auth:owners')->except(['show']);
+
+    Route::resource('products', ProductController::class)
     ->middleware('auth:owners')->except(['show']);
 
 Route::get('/dashboard', function () {
